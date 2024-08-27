@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>주문 조회</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e6e6fa; /* 연보라 배경색 */
+            margin: 0;
+            text-align: center;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            max-width: 320px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #4b0082; /* 진보라 색상 */
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #4b0082; /* 진보라 색상 */
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4b0082; /* 진보라 색상 */
+            outline: none;
+        }
+
+        .container p {
+            color: #4b0082; /* 진보라 색상 */
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>주문 조회</h1>
+        <p>아래에 주문 번호를 입력하세요:</p>
+
+        <label for="gmarketOrder">지마켓 주문 번호:</label>
+        <input type="text" id="gmarketOrder" oninput="openWindow('gmarket')" placeholder="지마켓 주문 번호">
+
+        <label for="auctionOrder">옥션 주문 번호:</label>
+        <input type="text" id="auctionOrder" oninput="openWindow('auction')" placeholder="옥션 주문 번호">
+
+        <label for="lotteonOrder">롯데온 주문 번호:</label>
+        <input type="text" id="lotteonOrder" oninput="openWindow('lotteon')" placeholder="롯데온 주문 번호">
+    </div>
+
+    <script>
+        function openWindow(type) {
+            let orderNumber;
+            let url;
+
+            if (type === 'gmarket') {
+                orderNumber = document.getElementById('gmarketOrder').value;
+                if (orderNumber) {
+                    url = 'https://my.gmarket.co.kr/ko/pc/detail/basic/' + orderNumber;
+                    document.getElementById('gmarketOrder').value = ''; // 입력값 초기화
+                }
+            } else if (type === 'auction') {
+                orderNumber = document.getElementById('auctionOrder').value;
+                if (orderNumber) {
+                    url = 'https://tracking.auction.co.kr/?orderNo=' + orderNumber;
+                    document.getElementById('auctionOrder').value = ''; // 입력값 초기화
+                }
+            } else if (type === 'lotteon') {
+                orderNumber = document.getElementById('lotteonOrder').value;
+                if (orderNumber) {
+                    url = 'https://www.lotteon.com/p/order/claim/orderDetail?odNo=' + orderNumber;
+                    document.getElementById('lotteonOrder').value = ''; // 입력값 초기화
+                }
+            }
+
+            if (url) {
+                window.open(url, '_blank');
+            }
+        }
+    </script>
+</body>
+</html>
